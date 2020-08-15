@@ -8,23 +8,30 @@ int main(){
   printf("********************************\n");
 
   int guess;
-  int guesshit;
-  int count_attempt = 1;
+  int notguesshit;
+  int countattempt = 0;
+  int guessnegativenumber;
+  int points = 1000;
 
-  while(SECRET_NUMBER != guess){
+  while(1){
 
-    printf("\nAttempt %d\n", count_attempt);
+
     printf("\nWhat is guess for the numer?\n");
     scanf("%d", &guess);
     printf("\n");
 
-    guesshit = (guess == SECRET_NUMBER);
 
-    if(!guesshit){
-      int guess_greater = guess > SECRET_NUMBER;
+    guessnegativenumber = guess < 0;
+    int guessgreater = guess > SECRET_NUMBER;
 
-
-      if(guess_greater){
+    if(SECRET_NUMBER == guess) break;
+    if(guessnegativenumber){
+      printf("\n*********************************\n");
+      printf("\nYou cannot guess negative numbers");
+      printf("\n*********************************\n");
+      continue;
+    }
+      else if(guessgreater){
 
         printf("*******************************************\n");
         printf("The guess is greater than the secret number\n");
@@ -34,13 +41,18 @@ int main(){
         printf("The guess is less than the secret number\n");
         printf("****************************************\n");
       }
-    }
 
-    count_attempt++;
+    countattempt++;
+
+    int pointslost = (guess - SECRET_NUMBER) / 2;
+    points += points - pointslost;
   }
+  printf("\n\n\n*****************************\n");
+  printf("*****You win in %d attempt****\n", countattempt);
+  printf("*****You win %d points*****\n", points);
+  printf("\n*****************************\n\n\n\n");
 
   printf("**********\n");
   printf("Game over!\n");
   printf("**********\n");
-
 }
